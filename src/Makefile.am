@@ -130,7 +130,7 @@ pkgconfig_DATA = harfbuzz.pc
 EXTRA_DIST += harfbuzz.pc.in
 
 FUZZING_CPPFLAGS= \
-	-DNDEBUG \
+	-DHB_NDEBUG \
 	-DHB_MAX_NESTING_LEVEL=3 \
 	-DHB_SANITIZE_MAX_EDITS=3 \
 	-DHB_BUFFER_MAX_EXPANSION_FACTOR=3 \
@@ -147,6 +147,12 @@ EXTRA_libharfbuzz_fuzzing_la_DEPENDENCIES = $(EXTRA_libharfbuzz_la_DEPENDENCIES)
 CLEANFILES += libharfbuzz-fuzzing.la
 
 if HAVE_ICU
+if HAVE_ICU_BUILTIN
+HBCFLAGS += $(ICU_CFLAGS)
+HBLIBS += $(ICU_LIBS)
+HBSOURCES += $(HB_ICU_sources)
+HBHEADERS += $(HB_ICU_headers)
+else
 lib_LTLIBRARIES += libharfbuzz-icu.la
 libharfbuzz_icu_la_SOURCES = $(HB_ICU_sources)
 libharfbuzz_icu_la_CPPFLAGS = $(ICU_CFLAGS)
@@ -154,6 +160,7 @@ libharfbuzz_icu_la_LDFLAGS = $(AM_LDFLAGS) -version-info $(HB_LIBTOOL_VERSION_IN
 libharfbuzz_icu_la_LIBADD = $(ICU_LIBS) libharfbuzz.la
 pkginclude_HEADERS += $(HB_ICU_headers)
 pkgconfig_DATA += harfbuzz-icu.pc
+endif
 endif
 EXTRA_DIST += harfbuzz-icu.pc.in
 
@@ -291,6 +298,8 @@ test_size_params_LDADD = libharfbuzz.la $(HBLIBS)
 test_buffer_serialize_SOURCES = test-buffer-serialize.cc
 test_buffer_serialize_CPPFLAGS = $(HBCFLAGS)
 test_buffer_serialize_LDADD = libharfbuzz.la $(HBLIBS)
+
+check: harfbuzz.def # For check-defs.sh
 
 dist_check_SCRIPTS = \
 	check-c-linkage-decls.sh \
