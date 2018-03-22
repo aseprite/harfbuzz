@@ -1,3 +1,44 @@
+Overview of changes leading to 1.7.6
+Wednesday, March 7, 2018
+====================================
+
+- Fix to hb_set_t binary operations. Ouch.
+- New experimental harfbuzz-subset library. All of hb-subset.h
+  is experimental right now and API WILL change.
+
+- New API:
+hb_blob_copy_writable_or_fail()
+HB_OT_TAG_BASE
+hb_set_previous()
+hb_set_previous_range()
+
+
+Overview of changes leading to 1.7.5
+Tuesday, January 30, 2018
+====================================
+
+- Separate Khmer shaper from Indic.
+- First stab at AAT morx. Not hooked up.
+- Misc bug fixes.
+
+
+Overview of changes leading to 1.7.4
+Wednesday, December 20, 2017
+====================================
+
+- Fix collect_glyphs() regression caused by hb_set_t changes.
+
+
+Overview of changes leading to 1.7.3
+Monday, December 18, 2017
+====================================
+
+- hb_set_t performance tuning and optimizations.
+- Speed up collect_glyphs() and reject garbage data.
+- In hb_coretext_font_create() set font point-size (ptem).
+- Misc fixes.
+
+
 Overview of changes leading to 1.7.2
 Monday, December 4, 2017
 ====================================
