@@ -278,12 +278,6 @@ if (HB_HAVE_FREETYPE)
 
   list(APPEND project_sources ${PROJECT_SOURCE_DIR}/src/hb-ft.cc)
   list(APPEND project_headers ${PROJECT_SOURCE_DIR}/src/hb-ft.h)
-
-  # So check_funcs can find its headers
-  set (CMAKE_REQUIRED_INCLUDES ${CMAKE_REQUIRED_INCLUDES} ${FREETYPE_INCLUDE_DIRS})
-  set (CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES} ${FREETYPE_LIBRARIES})
-
-  check_funcs(FT_Get_Var_Blend_Coordinates FT_Set_Var_Blend_Coordinates FT_Done_MM_Var)
 endif ()
 
 if (HB_HAVE_GRAPHITE2)
